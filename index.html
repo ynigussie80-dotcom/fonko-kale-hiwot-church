@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Fonko Kale-Hiwot Church</title>
+<link href="https://fonts.googleapis.com/css2?family=Lora:wght@500;600&family=Inter:wght@400;500&family=Noto+Sans+Ethiopic:wght@400;500&family=Noto+Serif+Ethiopic:wght@600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#FAF3E3;--card:#FFFFFF;--navy:#1F3A5F;--head:#1F3A5F;--gold:#C9A227;--text:#1F2937;--muted:#4A5568;--line:#E8DCC0;--sand:#F3E9CF;--cream:#F5E9D3;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#101C30;--card:#17284A;--head:#F5E9D3;--text:#E8E2D0;--muted:#B9B3A0;--line:#2C3E63;--sand:#1B2F55}}
+:root[data-theme="dark"]{--bg:#101C30;--card:#17284A;--head:#F5E9D3;--text:#E8E2D0;--muted:#B9B3A0;--line:#2C3E63;--sand:#1B2F55}
+html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font:16px/1.7 Inter,system-ui,"Noto Sans Ethiopic",sans-serif}
+h1,h2,h3{font-family:Lora,Georgia,serif;font-weight:600;color:var(--head);line-height:1.25;margin:0 0 .5rem}
+.wrap{max-width:1040px;margin:0 auto;padding:0 20px}
+header{background:var(--navy);color:var(--cream)}
+.nav{display:flex;flex-wrap:wrap;gap:8px 24px;align-items:center;justify-content:space-between;padding:14px 20px;max-width:1040px;margin:0 auto}
+.brand{font-family:Lora,Georgia,serif;font-weight:600;font-size:19px;color:var(--cream);text-decoration:none}
+.nav ul{display:flex;flex-wrap:wrap;gap:6px 20px;list-style:none;margin:0;padding:0}
+.nav a{color:var(--cream);text-decoration:none;font-size:15px}
+.nav a:hover{color:var(--gold)}
+.hero{background:var(--navy);color:var(--cream);padding:56px 0 64px;border-top:1px solid rgba(245,233,211,.15)}
+.hero h1{color:var(--cream);font-size:clamp(32px,6vw,52px);margin-bottom:12px}
+.hero p{max-width:560px;font-size:18px;margin:0 0 24px;color:#E3D8BE}
+.btn{display:inline-block;background:var(--gold);color:#1F3A5F;font-weight:500;padding:12px 22px;border-radius:8px;text-decoration:none}
+.btn:hover{filter:brightness(1.08)}
+.btn.ghost{background:transparent;color:var(--cream);border:1px solid var(--cream);margin-left:8px}
+section{padding:48px 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:20px}
+.card h3{font-size:19px}
+.times{margin-top:-32px;position:relative}
+.time{display:flex;justify-content:space-between;gap:12px;padding:8px 0;border-bottom:1px solid var(--line)}
+.time:last-child{border-bottom:0}
+.time b{font-weight:500}
+.muted{color:var(--muted);font-size:15px}
+.sermon-thumb{aspect-ratio:16/9;background:var(--navy);border-radius:8px;display:flex;align-items:center;justify-content:center;margin-bottom:12px}
+.play{width:56px;height:56px;border-radius:50%;background:var(--gold);display:flex;align-items:center;justify-content:center}
+.play::after{content:"";border-left:16px solid #1F3A5F;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px}
+.event{display:flex;gap:14px;align-items:center;padding:10px 0;border-bottom:1px solid var(--line)}
+.event:last-child{border-bottom:0}
+.date{min-width:54px;text-align:center;background:var(--sand);border-radius:8px;padding:6px 4px;line-height:1.2;color:var(--head)}
+.date span{display:block;font-size:12px;text-transform:uppercase;letter-spacing:.05em}
+.date b{font-family:Lora,Georgia,serif;font-size:20px}
+.give{background:var(--sand);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.sec-head{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:8px;margin-bottom:18px}
+.sec-head a{color:var(--head);font-weight:500}
+@media (max-width:600px){.btn.ghost{margin:10px 0 0}.hero{padding:40px 0 56px}}
+html{scroll-padding-top:calc(72px + env(safe-area-inset-top,0px))}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;background:rgba(31,58,95,.96);backdrop-filter:blur(8px);box-shadow:0 2px 12px rgba(0,0,0,.18)}
+.nav{flex-wrap:nowrap;padding:12px 20px}
+.brand{display:flex;align-items:center;gap:10px;font-size:20px}
+.brand::before{content:"";flex:none;width:30px;height:30px;border-radius:50%;background:linear-gradient(#1F3A5F,#1F3A5F) 50% 50%/3px 16px no-repeat,linear-gradient(#1F3A5F,#1F3A5F) 50% 10px/12px 3px no-repeat,#C9A227}
+.nav ul{margin-left:auto;gap:4px;align-items:center}
+.nav ul a{display:block;padding:8px 16px;border-radius:999px;transition:background .2s}
+.nav ul a:hover{background:rgba(245,233,211,.14);color:var(--cream)}
+.nav ul a.nav-cta{background:var(--gold);color:#1F3A5F;font-weight:500;margin-left:6px}
+.nav ul a.nav-cta:hover{background:#D8B53A;color:#1F3A5F}
+.burger{display:none;flex-direction:column;margin-left:auto;background:none;border:0;padding:8px;cursor:pointer}
+.burger span{display:block;width:24px;height:2px;background:var(--cream);margin:3px 0;border-radius:2px}
+.hero{position:relative;overflow:hidden;padding:88px 0 120px;background:radial-gradient(900px 420px at 85% 0%,rgba(201,162,39,.30),transparent 60%),linear-gradient(160deg,#1F3A5F 0%,#16294A 100%)}
+.hero::before{content:"";position:absolute;right:7%;top:50%;width:200px;height:300px;transform:translateY(-50%);opacity:.08;background:linear-gradient(#F5E9D3,#F5E9D3) 50% 0/36px 100% no-repeat,linear-gradient(#F5E9D3,#F5E9D3) 50% 90px/200px 36px no-repeat}
+.hero .wrap{position:relative}
+.hero h1{font-size:clamp(38px,7vw,64px)}
+.pill{display:inline-block;background:rgba(201,162,39,.18);color:#E8CF7A;border:1px solid rgba(201,162,39,.5);padding:4px 14px;border-radius:999px;font-size:13px;margin-bottom:16px}
+.btn{border-radius:999px;box-shadow:0 6px 16px rgba(0,0,0,.18);transition:transform .15s}
+.btn:hover{transform:translateY(-2px)}
+.times{margin-top:-64px}
+.card{border-radius:16px;box-shadow:0 8px 24px rgba(31,58,95,.08);transition:transform .2s,box-shadow .2s}
+.card:hover{transform:translateY(-3px);box-shadow:0 12px 28px rgba(31,58,95,.16)}
+.card h3::after{content:"";display:block;width:32px;height:3px;background:var(--gold);border-radius:2px;margin-top:6px}
+h2{font-size:clamp(26px,4vw,34px)}
+.sec-head h2::after{content:"";display:block;width:44px;height:4px;background:var(--gold);border-radius:2px;margin-top:8px}
+.date{background:var(--navy);color:var(--cream)}
+.date span{color:var(--gold)}
+.date b{color:var(--cream)}
+.sermon-thumb{background:linear-gradient(135deg,#1F3A5F,#2C5282)}
+.play{box-shadow:0 0 0 8px rgba(201,162,39,.25)}
+.give{padding:64px 0}
+@media (max-width:780px){.burger{display:flex}.nav ul{display:none;position:absolute;left:0;right:0;top:100%;flex-direction:column;align-items:stretch;gap:2px;background:var(--navy);padding:10px 20px 18px;box-shadow:0 12px 20px rgba(0,0,0,.2)}.nav ul.open{display:flex}.nav ul a.nav-cta{margin:6px 0 0;text-align:center}.hero{padding:56px 0 100px}.hero::before{opacity:.05}}
+@keyframes rise{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+@keyframes ring{0%{box-shadow:0 0 0 0 rgba(201,162,39,.45)}100%{box-shadow:0 0 0 18px rgba(201,162,39,0)}}
+.hero .wrap>*{animation:rise .7s ease both}
+.hero .wrap>*:nth-child(1){animation-delay:.05s}.hero .wrap>*:nth-child(2){animation-delay:.15s}.hero .wrap>*:nth-child(3){animation-delay:.28s}.hero .wrap>*:nth-child(4){animation-delay:.4s}.hero .wrap>*:nth-child(5){animation-delay:.46s}
+.play{animation:ring 2.4s ease-out infinite}
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease}
+.reveal.in{opacity:1;transform:none}
+.tools{margin-bottom:6px}
+#q{width:100%;max-width:360px;padding:10px 16px;border:1px solid var(--line);border-radius:999px;background:var(--card);color:var(--text);font:inherit;margin-bottom:12px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px}
+.chip{background:var(--card);color:var(--head);border:1px solid var(--line);border-radius:999px;padding:6px 14px;font:inherit;font-size:14px;cursor:pointer;transition:background .2s}
+.chip:hover{border-color:var(--gold)}
+.chip.on{background:var(--gold);color:#1F3A5F;border-color:var(--gold)}
+.card.sm{animation:rise .45s ease both}
+.card.sm .sermon-thumb{aspect-ratio:16/8}
+.play.sm{width:40px;height:40px;animation:none;box-shadow:none}
+.play.sm::after{border-left-width:12px;border-top-width:8px;border-bottom-width:8px;margin-left:3px}
+.tag{display:inline-block;font-size:12px;background:var(--sand);color:var(--head);padding:2px 10px;border-radius:999px;margin-bottom:6px}
+.lk{color:var(--head);font-weight:500;margin-right:14px}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}}
+.give .wrap{max-width:860px!important}
+.give-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px;margin-top:22px}
+.gl{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid var(--line)}
+.gl:last-child{border-bottom:0}
+.gl small{display:block;color:var(--muted);font-size:12px;line-height:1.3}
+.lk.off{color:var(--muted);font-weight:400}
+footer{position:relative;overflow:hidden;background:radial-gradient(700px 300px at 90% 0%,rgba(201,162,39,.18),transparent 60%),linear-gradient(170deg,#1F3A5F,#12254A);color:var(--cream);padding:64px 0 0;border-top:4px solid var(--gold)}
+footer::before{content:"";position:absolute;left:-30px;bottom:-50px;width:260px;height:380px;opacity:.05;background:linear-gradient(#F5E9D3,#F5E9D3) 50% 0/44px 100% no-repeat,linear-gradient(#F5E9D3,#F5E9D3) 50% 110px/260px 44px no-repeat}
+footer .wrap{position:relative}
+.ft-cta{display:flex;flex-wrap:wrap;gap:20px;align-items:center;justify-content:space-between;padding:28px 32px;border:1px solid rgba(201,162,39,.4);border-radius:20px;background:rgba(245,233,211,.06)}
+.ft-cta h3{color:var(--cream);font-size:26px;margin:0 0 4px}
+.ft-cta p{margin:0;color:#D9CDB0}
+.ft-cta-btns{display:flex;flex-wrap:wrap;gap:10px}
+.ft-cta .btn.ghost{margin:0}
+.ft-grid{display:grid;grid-template-columns:1.3fr 1fr 1fr .8fr;gap:36px;padding:48px 0 40px}
+.ft-brand{display:flex;align-items:center;gap:12px;font-family:Lora,Georgia,serif;font-size:22px;font-weight:600;margin-bottom:12px}
+.ft-brand i{flex:none;width:40px;height:40px;border-radius:50%;background:linear-gradient(#1F3A5F,#1F3A5F) 50% 50%/4px 21px no-repeat,linear-gradient(#1F3A5F,#1F3A5F) 50% 13px/16px 4px no-repeat,#C9A227}
+.ft-tag{margin:0;color:#D9CDB0;max-width:300px}
+footer h4{font-family:Inter,system-ui,sans-serif;font-size:13px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin:0 0 18px}
+.ft-row{display:flex;gap:12px;align-items:flex-start;margin-bottom:16px}
+.ico{flex:none;width:38px;height:38px;border-radius:50%;background:rgba(201,162,39,.16);border:1px solid rgba(201,162,39,.45);display:flex;align-items:center;justify-content:center;color:var(--gold)}
+.ico svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.ft-row small{display:block;font-size:12px;letter-spacing:.04em;color:#BFB397;line-height:1.4}
+.ft-row span{line-height:1.5}
+.ft-links{list-style:none;margin:0;padding:0}
+.ft-links a{display:inline-flex;align-items:center;padding:6px 0;color:var(--cream);text-decoration:none;transition:color .2s,transform .2s}
+.ft-links a::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--gold);margin-right:12px}
+.ft-links a:hover{color:var(--gold);transform:translateX(4px)}
+.ft-bottom{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px;padding:18px 0;border-top:1px solid rgba(245,233,211,.16);font-size:13px;color:#CFC4A8}
+.ft-bottom a{color:var(--cream);text-decoration:none}
+.ft-bottom a:hover{color:var(--gold)}
+@media (max-width:860px){.ft-grid{grid-template-columns:1fr 1fr;gap:30px}.ft-grid>div:first-child{grid-column:1/-1}.ft-cta{padding:24px 20px}}
+@media (max-width:520px){.ft-grid{grid-template-columns:1fr}}
+.lang{background:transparent;border:1px solid rgba(245,233,211,.4);color:var(--cream);border-radius:999px;padding:7px 16px;font:inherit;font-size:14px;cursor:pointer;transition:border-color .2s,color .2s}
+.lang:hover{border-color:var(--gold);color:var(--gold)}
+html:lang(am) body{font-family:"Noto Sans Ethiopic",Inter,system-ui,sans-serif;line-height:1.8}
+html:lang(am) :is(h1,h2,h3,.brand,.ft-brand,.date b){font-family:"Noto Serif Ethiopic",Georgia,serif}
+@media (max-width:780px){.nav ul .lang{width:100%;padding:10px;margin-top:4px}}
+.lang{display:flex;align-items:center;gap:8px}
+.lang svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:1.7;stroke-linecap:round}
+.ev{border-bottom:1px solid var(--line)}
+.ev:last-child{border-bottom:0}
+.ev summary{display:flex;align-items:center;gap:14px;padding:12px 0;cursor:pointer;list-style:none}
+.ev summary::-webkit-details-marker{display:none}
+.ev summary::after{content:"+";font-size:22px;line-height:1;color:var(--gold);width:24px;text-align:center}
+.ev[open] summary::after{content:"\2212"}
+.ev-t{flex:1}
+.ev-t b{font-weight:500;transition:color .2s}
+.ev summary:hover .ev-t b{color:var(--gold)}
+.ev p{margin:0 0 14px 68px}
+@media (max-width:520px){.ev .tag{display:none}.ev p{margin-left:0}}
+#list{grid-template-columns:1fr}
+.card.sm{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px;align-items:center;padding:20px}
+.card.sm .sermon-thumb{aspect-ratio:16/9;margin-bottom:0}
+.card.sm .play{animation:none;box-shadow:0 0 0 8px rgba(201,162,39,.25)}
+.card.sm:hover .play{animation:ring 1.6s ease-out infinite}
+.acts{display:flex;flex-wrap:wrap;gap:10px}
+.btn.s{padding:12px 24px;font-size:16px;margin:0}
+.acts .btn:nth-child(2){background:transparent;color:var(--head);border:1px solid var(--gold);box-shadow:none}
+.acts .btn.off{background:var(--sand);color:var(--muted);border-color:transparent;box-shadow:none;cursor:default}
+.acts .btn.off:hover{transform:none;filter:none}
+@media (max-width:520px){.card.sm{grid-template-columns:1fr}}
+.nav>.lang{flex:none;margin-left:14px}
+@media (max-width:780px){.nav>.lang{margin-left:8px;padding:7px 12px}}
+</style>
+</head>
+<body>
+<header>
+  <nav class="nav" aria-label="Main">
+    <a class="brand" href="#top">Fonko Kale-Hiwot Church</a>
+    <button class="burger" aria-label="Menu" aria-expanded="false" aria-controls="menu"><span></span><span></span><span></span></button>
+    <ul id="menu">
+      <li><a href="#visit">Visit</a></li>
+      <li><a href="#sermons">Sermons</a></li>
+      <li><a href="#events">Events</a></li>
+      <li><a class="nav-cta" href="#give">Give</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <button class="lang" id="lang" type="button" aria-label="Language"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3.2 3 14.8 0 18M12 3c-3 3.2-3 14.8 0 18"/></svg><span id="lang-t">አማርኛ</span></button>
+  </nav>
+</header>
+
+<main id="top">
+  <div class="hero">
+    <div class="wrap">
+      <span class="pill">Everyone is welcome</span>
+      <h1>Welcome home</h1>
+      <p>Whoever you are and wherever you are in your walk with God, there is a place for you at Fonko Kale-Hiwot Church.</p>
+      <a class="btn" href="#visit">Plan your visit</a>
+      <a class="btn ghost" href="#sermons">Watch a sermon</a>
+    </div>
+  </div>
+
+  <section id="visit" class="times" style="padding-top:0">
+    <div class="wrap grid">
+      <div class="card">
+        <h3>Service times</h3>
+        <div class="time"><b>Sunday worship</b><span>9:00 AM</span></div>
+        <div class="time"><b>Midweek prayer</b><span>Wed, 6:00 PM</span></div>
+        <div class="time"><b>Youth fellowship</b><span>Sat, 4:00 PM</span></div>
+      </div>
+      <div class="card">
+        <h3>Find us</h3>
+        <p class="muted" style="margin:0 0 10px">Church address goes here<br>Town, Region</p>
+        <a href="#contact" style="color:var(--head);font-weight:500">Get directions</a>
+      </div>
+      <div class="card">
+        <h3>First time here?</h3>
+        <p class="muted" style="margin:0 0 10px">Come as you are. Expect warm greetings, worship in song, and a message from God's Word.</p>
+        <a href="#contact" style="color:var(--head);font-weight:500">Tell us you're coming</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="sermons">
+    <div class="wrap">
+      <div class="sec-head"><h2>Latest sermon</h2><a href="#library">All sermons</a></div>
+      <div class="card" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px;align-items:center">
+        <div class="sermon-thumb"><div class="play" role="img" aria-label="Play"></div></div>
+        <div>
+          <p class="muted" style="margin:0">Sunday message</p>
+          <h3>Sermon title goes here</h3>
+          <p class="muted" style="margin:0 0 12px">Speaker name · Date · Scripture reference</p>
+          <a class="btn" href="#sermons">Watch or listen</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="library" style="padding-top:0">
+    <div class="wrap">
+      <div class="sec-head"><h2>Sermon library</h2></div>
+      <div class="chips" id="chan"></div>
+      <div class="tools">
+        <input id="q" type="search" placeholder="Search by title or Scripture" aria-label="Search sermons">
+        <div class="chips" id="chips">
+          <button class="chip on" data-k="all">All</button>
+          <button class="chip" data-k="Sunday message">Sunday messages</button>
+          <button class="chip" data-k="Bible study">Bible study</button>
+          <button class="chip" data-k="Special service">Special services</button>
+        </div>
+      </div>
+      <div class="grid" id="list"></div>
+      <p class="muted" id="none" hidden>No sermons found. Try another search.</p>
+    </div>
+  </section>
+
+  <section id="events" style="padding-top:0">
+    <div class="wrap">
+      <div class="sec-head"><h2>Upcoming events</h2></div>
+      <div class="chips" id="ev-chips"><button class="chip on" data-e="all">All</button><button class="chip" data-e="Worship">Worship</button><button class="chip" data-e="Youth">Youth</button><button class="chip" data-e="Community">Community</button></div>
+      <div class="card" id="ev-list"></div>
+    </div>
+  </section>
+
+  <section id="give" class="give">
+    <div class="wrap" style="max-width:680px;text-align:center">
+      <h2>Give</h2>
+      <p>Your generosity supports worship, ministry, and caring for people in our community. Thank you for giving cheerfully.</p>
+      <div class="give-grid"><div class="card" style="text-align:left"><h3>Bank transfer</h3><div id="g-bank"></div></div><div class="card" style="text-align:left"><h3>Mobile money</h3><div id="g-mm"></div></div></div>
+      <p class="muted" style="margin-top:18px">"God loves a cheerful giver." 2 Corinthians 9:7</p>
+      
+    </div>
+  </section>
+</main>
+
+<footer id="contact">
+  <div class="wrap">
+    <div class="ft-cta">
+      <div><h3>Join us this Sunday</h3><p>Sunday worship at 9:00 AM. Come as you are, everyone is welcome.</p></div>
+      <div class="ft-cta-btns"><a class="btn" href="#visit">Plan your visit</a><a class="btn ghost" href="#sermons">Watch a sermon</a></div>
+    </div>
+    <div class="ft-grid">
+      <div>
+        <div class="ft-brand"><i></i>Fonko Kale-Hiwot Church</div>
+        <p class="ft-tag">A welcoming community growing together in the Word of Life.</p>
+      </div>
+      <div><h4>Visit us</h4><div class="ft-row"><div class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-6.2-7-11a7 7 0 1 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg></div><div><small>Address</small><span>Church address<br>Town, Region</span></div></div><div class="ft-row"><div class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div><div><small>Sunday worship</small><span>9:00 AM</span></div></div></div>
+      <div><h4>Get in touch</h4><div class="ft-row"><div class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg></div><div><small>Phone</small><span>Add number</span></div></div><div class="ft-row"><div class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg></div><div><small>Email</small><span>Add email</span></div></div></div>
+      <div><h4>Explore</h4>
+        <ul class="ft-links"><li><a href="#visit">Plan your visit</a></li><li><a href="#sermons">Sermons</a></li><li><a href="#events">Events</a></li><li><a href="#give">Give</a></li></ul>
+      </div>
+    </div>
+    <div class="ft-bottom"><span>&copy; 2026 Fonko Kale-Hiwot Church. All rights reserved.</span><a href="#top">Back to top &uarr;</a></div>
+  </div>
+</footer>
+<script>
+var b=document.querySelector('.burger'),m=document.getElementById('menu');
+b.addEventListener('click',function(){var o=m.classList.toggle('open');b.setAttribute('aria-expanded',o)});
+m.addEventListener('click',function(e){if(e.target.tagName==='A'){m.classList.remove('open');b.setAttribute('aria-expanded',false)}});
+</script>
+<script>
+var S=[{t:"Walking in faith",k:"Sunday message",p:"Speaker name",d:"Oct 4, 2026",r:"Hebrews 11:1-6"},{t:"The Word of Life",k:"Bible study",p:"Speaker name",d:"Oct 7, 2026",r:"John 1:1-14"},{t:"Grace that sustains",k:"Sunday message",p:"Speaker name",d:"Sep 27, 2026",r:"Ephesians 2:1-10"},{t:"Prayer and persistence",k:"Bible study",p:"Speaker name",d:"Sep 23, 2026",r:"Luke 18:1-8"},{t:"Hope for every season",k:"Special service",p:"Speaker name",d:"Sep 11, 2026",r:"Romans 15:13"},{t:"Serving one another",k:"Sunday message",p:"Speaker name",d:"Sep 20, 2026",r:"Galatians 5:13-14"}];
+function lnk(u,l){return /^https?:/.test(u||"")?'<a class="btn s" href="'+u+'" target="_blank" rel="noopener">'+l+'</a>':'<span class="btn s off">'+l+' (soon)</span>'}
+var cur="all",q="",L=document.getElementById('list'),N=document.getElementById('none');
+function draw(){var h="",n=0;S.forEach(function(x){if((cur==="all"||x.k===cur)&&(x.t+" "+x.r).toLowerCase().indexOf(q)>-1){n++;h+='<article class="card sm"><div class="sermon-thumb"><i class="play"></i></div><div><p class="muted" style="margin:0">'+x.k+'</p><h3>'+x.t+'</h3><p class="muted" style="margin:0 0 14px">'+x.p+' · '+x.d+'<br>'+x.r+'</p>'+'<div class="acts">'+lnk(x.v,"Watch")+lnk(x.a,"Listen")+'</div></div></article>'}});L.innerHTML=h;N.hidden=n>0;if(window.applyLang)applyLang(L)}
+document.getElementById('q').addEventListener('input',function(e){q=e.target.value.toLowerCase().trim();draw()});
+document.getElementById('chips').addEventListener('click',function(e){var c=e.target.closest('.chip');if(!c)return;cur=c.getAttribute('data-k');document.querySelectorAll('#chips .chip').forEach(function(x){x.classList.toggle('on',x===c)});draw()});
+draw();
+if('IntersectionObserver' in window){var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);setTimeout(function(){e.target.classList.remove('reveal','in')},800)}})},{threshold:.12});document.querySelectorAll('.times .card,#sermons .card,#events .card,.sec-head,.tools,.give .wrap').forEach(function(el){el.classList.add('reveal');io.observe(el)})}
+</script>
+<script>
+var GIVE={bank:{"Bank name":"","Account name":"","Account number":""},mobile:{"Provider":"","Phone number":"","Account name":""}};
+var CH={YouTube:"",Facebook:"",Telegram:"",Audio:""};
+function rows(id,o){var box=document.getElementById(id);Object.keys(o).forEach(function(k){var r=document.createElement('div');r.className='gl';var d=document.createElement('div');var s=document.createElement('small');s.textContent=k;var v=document.createElement('span');v.textContent=o[k]||'Add details';if(!o[k])v.className='muted';d.appendChild(s);d.appendChild(v);r.appendChild(d);if(o[k]){var b=document.createElement('button');b.className='chip';b.textContent='Copy';b.onclick=function(){(navigator.clipboard?navigator.clipboard.writeText(o[k]):Promise.reject()).then(function(){b.textContent='Copied'},function(){b.textContent='Select and copy'});setTimeout(function(){b.textContent='Copy'},1800)};r.appendChild(b)}box.appendChild(r)})}
+rows('g-bank',GIVE.bank);rows('g-mm',GIVE.mobile);
+var ch=document.getElementById('chan'),n=0;Object.keys(CH).forEach(function(k){if(/^https?:/.test(CH[k])){n++;var a=document.createElement('a');a.className='chip';a.href=CH[k];a.target='_blank';a.rel='noopener';a.textContent=k==='Audio'?'Listen to audio':'Watch on '+k;ch.appendChild(a)}});
+if(!n){ch.innerHTML='<span class="muted">Links to our YouTube, Facebook, and audio channels will appear here.</span>'}
+</script>
+<script>
+var AM={"Worship":"አምልኮ","Youth":"ወጣቶች","Community":"ማኅበረሰብ","Youth night":"የወጣቶች ምሽት","Community outreach":"የማኅበረሰብ አገልግሎት","Baptism service":"የጥምቀት አገልግሎት","Main sanctuary":"ዋናው አዳራሽ","Church hall":"የቤተ ክርስቲያኑ አዳራሽ","Meet at the church":"በቤተ ክርስቲያኑ እንገናኝ","No events in this category yet.":"በዚህ ምድብ ገና ዝግጅት የለም።","Join us for worship in song and a message from God's Word. Everyone is welcome.":"በዝማሬ አምልኮና ከእግዚአብሔር ቃል በሚቀርብ መልእክት ይቀላቀሉን። ሁሉም እንኳን ደህና መጡ።","A quiet evening of prayer and Scripture reading.":"የጸሎትና የመጽሐፍ ቅዱስ ንባብ ጸጥ ያለ ምሽት።","Worship, teaching, and fellowship for young people.":"ለወጣቶች የአምልኮ፣ የትምህርትና የኅብረት ጊዜ።","Serving our neighbors together. Volunteers are welcome.":"ጎረቤቶቻችንን በአንድነት ማገልገል። በጎ ፈቃደኞች እንኳን ደህና መጡ።","A special service celebrating new believers.":"አዳዲስ አማኞችን የምናከብርበት ልዩ አገልግሎት።","Fonko Kale-Hiwot Church":"ፎንቆ ቃለ ሕይወት ቤተ ክርስቲያን","Visit":"ጉብኝት","Sermons":"ስብከቶች","Events":"ዝግጅቶች","Give":"ስጦታ","Contact":"ዕውቂያ","Everyone is welcome":"ሁሉም እንኳን ደህና መጡ","Welcome home":"እንኳን ደህና መጡ","Whoever you are and wherever you are in your walk with God, there is a place for you at Fonko Kale-Hiwot Church.":"ማንም ይሁኑ፣ በእግዚአብሔር ጉዞዎ ውስጥ በየትኛውም ደረጃ ላይ ቢሆኑ፣ በፎንቆ ቃለ ሕይወት ቤተ ክርስቲያን ለእርስዎ ቦታ አለ።","Plan your visit":"ጉብኝትዎን ያቅዱ","Watch a sermon":"ስብከት ይመልከቱ","Service times":"የአገልግሎት ሰዓቶች","Sunday worship":"የእሁድ አምልኮ","Midweek prayer":"የሳምንት አጋማሽ ጸሎት","Youth fellowship":"የወጣቶች ኅብረት","Find us":"የት እንገኛለን","Church address goes here":"የቤተ ክርስቲያኑ አድራሻ እዚህ ይገባል","Church address":"የቤተ ክርስቲያኑ አድራሻ","Town, Region":"ከተማ፣ ክልል","Get directions":"አቅጣጫ ያግኙ","First time here?":"የመጀመሪያ ጊዜዎ ነው?","Come as you are. Expect warm greetings, worship in song, and a message from God's Word.":"እንደ ሆኑ ይምጡ። ሞቅ ያለ አቀባበል፣ የዝማሬ አምልኮ እና ከእግዚአብሔር ቃል የሚቀርብ መልእክት ይጠብቁ።","Tell us you're coming":"እንደሚመጡ ያሳውቁን","Latest sermon":"የቅርብ ጊዜ ስብከት","All sermons":"ሁሉም ስብከቶች","Sunday message":"የእሁድ መልእክት","Sermon title goes here":"የስብከቱ ርዕስ እዚህ ይገባል","Speaker name · Date · Scripture reference":"የሰባኪው ስም · ቀን · የመጽሐፍ ቅዱስ ጥቅስ","Watch or listen":"ይመልከቱ ወይም ያዳምጡ","Sermon library":"የስብከት ቤተ መጻሕፍት","All":"ሁሉም","Sunday messages":"የእሁድ መልእክቶች","Bible study":"የመጽሐፍ ቅዱስ ጥናት","Special services":"ልዩ አገልግሎቶች","Special service":"ልዩ አገልግሎት","Links to our YouTube, Facebook, and audio channels will appear here.":"የዩቲዩብ፣ የፌስቡክ እና የድምፅ ቻናሎቻችን አገናኞች እዚህ ይታያሉ።","No sermons found. Try another search.":"ምንም ስብከት አልተገኘም። ሌላ ፍለጋ ይሞክሩ።","Walking in faith":"በእምነት መመላለስ","The Word of Life":"የሕይወት ቃል","Grace that sustains":"የሚደግፍ ጸጋ","Prayer and persistence":"ጸሎትና ጽናት","Hope for every season":"ለእያንዳንዱ ወቅት ተስፋ","Serving one another":"እርስ በርስ ማገልገል","Watch":"ይመልከቱ","Listen":"ያዳምጡ","Watch (soon)":"ይመልከቱ (በቅርቡ)","Listen (soon)":"ያዳምጡ (በቅርቡ)","Upcoming events":"መጪ ዝግጅቶች","Full calendar":"ሙሉ የቀን መቁጠሪያ","Event name":"የዝግጅቱ ስም","Time · Place":"ሰዓት · ቦታ","Your generosity supports worship, ministry, and caring for people in our community. Thank you for giving cheerfully.":"ቸርነትዎ አምልኮን፣ አገልግሎትንና በማኅበረሰባችን ያሉ ሰዎችን መንከባከብን ይደግፋል። በደስታ ስለሰጡ እናመሰግናለን።","Bank transfer":"የባንክ ዝውውር","Mobile money":"የሞባይል ገንዘብ","Bank name":"የባንክ ስም","Account name":"የሂሳብ ስም","Account number":"የሂሳብ ቁጥር","Provider":"አገልግሎት ሰጪ","Phone number":"ስልክ ቁጥር","Add details":"ዝርዝር ይጨመራል","\"God loves a cheerful giver.\" 2 Corinthians 9:7":"እግዚአብሔር በደስታ የሚሰጠውን ይወዳልና። 2ኛ ቆሮንቶስ 9፡7","Join us this Sunday":"በዚህ እሁድ ይቀላቀሉን","Sunday worship at 9:00 AM. Come as you are, everyone is welcome.":"የእሁድ አምልኮ በ9:00 AM። እንደ ሆኑ ይምጡ፣ ሁሉም እንኳን ደህና መጡ።","A welcoming community growing together in the Word of Life.":"በሕይወት ቃል አብረን የምናድግ ተቀባይ ማኅበረሰብ።","Visit us":"ይጎብኙን","Address":"አድራሻ","Get in touch":"ያግኙን","Phone":"ስልክ","Add number":"ቁጥር ይጨመራል","Email":"ኢሜይል","Add email":"ኢሜይል ይጨመራል","Explore":"ይመልከቱ","© 2026 Fonko Kale-Hiwot Church. All rights reserved.":"© 2026 ፎንቆ ቃለ ሕይወት ቤተ ክርስቲያን። መብቱ በሕግ የተጠበቀ ነው።","Back to top ↑":"ወደ ላይ ተመለስ ↑"};
+var SUBS=[["Speaker name","የሰባኪው ስም"],["Hebrews","ዕብራውያን"],["John","ዮሐንስ"],["Ephesians","ኤፌሶን"],["Luke","ሉቃስ"],["Romans","ሮሜ"],["Galatians","ገላትያ"]];
+var PH="Search by title or Scripture",PHAM="በርዕስ ወይም በጥቅስ ይፈልጉ",TTL="Fonko Kale-Hiwot Church";
+var lang="en";
+function applyLang(root){var am=lang==="am",w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,null),n,A=[];while(n=w.nextNode())A.push(n);A.forEach(function(n){var p=n.parentNode?n.parentNode.nodeName:"";if(p==="SCRIPT"||p==="STYLE"||n.parentNode.id==="lang-t")return;if(am){if(n._o===undefined)n._o=n.nodeValue;var k=n._o.replace(/\s+/g," ").trim();if(!k)return;if(AM[k]!==undefined){n.nodeValue=n._o.replace(k,AM[k]).replace(/^(\s*)(.*?)(\s*)$/,"$1$2$3")}else if(n.parentNode.closest&&n.parentNode.closest("#list")){var t=n._o;SUBS.forEach(function(s){t=t.split(s[0]).join(s[1])});n.nodeValue=t}}else if(n._o!==undefined){n.nodeValue=n._o}});var q=document.getElementById("q");if(q&&(root===document.body||root.contains(q)))q.placeholder=am?PHAM:PH}
+function setLang(l){lang=l;document.documentElement.lang=l;applyLang(document.body);document.getElementById("lang-t").textContent=l==="am"?"English":"አማርኛ";document.title=l==="am"?AM[TTL]:TTL;try{localStorage.setItem("lang",l)}catch(e){}}
+document.getElementById("lang").addEventListener("click",function(){setLang(lang==="en"?"am":"en")});
+try{if(localStorage.getItem("lang")==="am")setLang("am")}catch(e){}
+</script>
+<script>
+var EV=[{m:"Oct",d:"11",t:"Sunday worship",k:"Worship",h:"9:00 AM",p:"Main sanctuary",x:"Join us for worship in song and a message from God's Word. Everyone is welcome."},{m:"Oct",d:"14",t:"Midweek prayer",k:"Worship",h:"6:00 PM",p:"Main sanctuary",x:"A quiet evening of prayer and Scripture reading."},{m:"Oct",d:"17",t:"Youth night",k:"Youth",h:"4:00 PM",p:"Church hall",x:"Worship, teaching, and fellowship for young people."},{m:"Oct",d:"24",t:"Community outreach",k:"Community",h:"10:00 AM",p:"Meet at the church",x:"Serving our neighbors together. Volunteers are welcome."},{m:"Nov",d:"01",t:"Baptism service",k:"Worship",h:"9:00 AM",p:"Main sanctuary",x:"A special service celebrating new believers."}];
+var ek="all";
+function drawE(){var h="";EV.forEach(function(e){if(ek==="all"||e.k===ek){h+='<details class="ev"><summary><div class="date"><span>'+e.m+'</span><b>'+e.d+'</b></div><div class="ev-t"><b>'+e.t+'</b><div class="muted"><span>'+e.h+'</span> \u00b7 <span>'+e.p+'</span></div></div><span class="tag">'+e.k+'</span></summary><p class="muted">'+e.x+'</p></details>'}});var L2=document.getElementById("ev-list");L2.innerHTML=h||'<p class="muted">No events in this category yet.</p>';if(window.applyLang)applyLang(L2)}
+document.getElementById("ev-chips").addEventListener("click",function(e){var c=e.target.closest(".chip");if(!c)return;ek=c.getAttribute("data-e");document.querySelectorAll("#ev-chips .chip").forEach(function(x){x.classList.toggle("on",x===c)});drawE()});
+drawE();
+</script>
+</body>
+</html>
