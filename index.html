@@ -163,6 +163,10 @@ html:lang(am) :is(h1,h2,h3,.brand,.ft-brand,.date b){font-family:"Noto Serif Eth
 @media (max-width:520px){.card.sm{grid-template-columns:1fr}}
 .nav>.lang{flex:none;margin-left:14px}
 @media (max-width:780px){.nav>.lang{margin-left:8px;padding:7px 12px}}
+.fl{display:block;font-size:14px;color:var(--muted);margin-bottom:4px}
+.fld{display:block;width:100%;padding:10px 14px;border:1px solid var(--line);border-radius:12px;background:var(--bg);color:var(--text);font:inherit;margin-bottom:14px}
+textarea.fld{min-height:120px;resize:vertical}
+.fld:focus{outline:2px solid var(--gold);outline-offset:1px}
 </style>
 </head>
 <body>
@@ -219,10 +223,10 @@ html:lang(am) :is(h1,h2,h3,.brand,.ft-brand,.date b){font-family:"Noto Serif Eth
       <div class="card" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px;align-items:center">
         <div class="sermon-thumb"><div class="play" role="img" aria-label="Play"></div></div>
         <div>
-          <p class="muted" style="margin:0">Sunday message</p>
-          <h3>Sermon title goes here</h3>
-          <p class="muted" style="margin:0 0 12px">Speaker name · Date · Scripture reference</p>
-          <a class="btn" href="#sermons">Watch or listen</a>
+          <p id="ls-k" class="muted" style="margin:0">Sunday message</p>
+          <h3 id="ls-t">Sermon title goes here</h3>
+          <p id="ls-m" class="muted" style="margin:0 0 12px">Speaker name · Date · Scripture reference</p>
+          <a id="ls-b" class="btn" href="#library">Watch or listen</a>
         </div>
       </div>
     </div>
@@ -265,7 +269,26 @@ html:lang(am) :is(h1,h2,h3,.brand,.ft-brand,.date b){font-family:"Noto Serif Eth
   </section>
 </main>
 
-<footer id="contact">
+<section id="message" class="give" hidden style="padding:56px 0">
+    <div class="wrap">
+      <h2>Prayer requests and messages</h2>
+      <p>We would love to hear from you. Share a prayer request or send us a message.</p>
+      <form id="mform" class="card" style="text-align:left" novalidate>
+        <label class="fl" for="mk">Type</label>
+        <select id="mk" name="kind" class="fld"><option value="prayer">Prayer request</option><option value="contact">Message</option></select>
+        <label class="fl" for="pn">Your name (optional)</label>
+        <input id="pn" name="pname" class="fld" type="text" maxlength="120" autocomplete="name">
+        <label class="fl" for="pc">Phone or email (optional)</label>
+        <input id="pc" name="contact" class="fld" type="text" maxlength="160">
+        <label class="fl" for="pb">Your message</label>
+        <textarea id="pb" name="body" class="fld" rows="5" maxlength="2000" required></textarea>
+        <button class="btn" type="submit" style="border:0;cursor:pointer;font:inherit;font-weight:500">Send</button>
+        <p id="mstat" class="muted" role="status" style="margin:12px 0 0"></p>
+      </form>
+    </div>
+  </section>
+
+  <footer id="contact">
   <div class="wrap">
     <div class="ft-cta">
       <div><h3>Join us this Sunday</h3><p>Sunday worship at 9:00 AM. Come as you are, everyone is welcome.</p></div>
@@ -279,7 +302,7 @@ html:lang(am) :is(h1,h2,h3,.brand,.ft-brand,.date b){font-family:"Noto Serif Eth
       <div><h4>Visit us</h4><div class="ft-row"><div class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-6.2-7-11a7 7 0 1 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg></div><div><small>Address</small><span>Church address<br>Town, Region</span></div></div><div class="ft-row"><div class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div><div><small>Sunday worship</small><span>9:00 AM</span></div></div></div>
       <div><h4>Get in touch</h4><div class="ft-row"><div class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg></div><div><small>Phone</small><span>Add number</span></div></div><div class="ft-row"><div class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg></div><div><small>Email</small><span>Add email</span></div></div></div>
       <div><h4>Explore</h4>
-        <ul class="ft-links"><li><a href="#visit">Plan your visit</a></li><li><a href="#sermons">Sermons</a></li><li><a href="#events">Events</a></li><li><a href="#give">Give</a></li></ul>
+        <ul class="ft-links"><li><a href="#visit">Plan your visit</a></li><li><a href="#sermons">Sermons</a></li><li><a href="#events">Events</a></li><li><a href="#give">Give</a></li><li id="msg-link" hidden><a href="#message">Prayer request</a></li></ul>
       </div>
     </div>
     <div class="ft-bottom"><span>&copy; 2026 Fonko Kale-Hiwot Church. All rights reserved.</span><a href="#top">Back to top &uarr;</a></div>
@@ -309,7 +332,7 @@ var ch=document.getElementById('chan'),n=0;Object.keys(CH).forEach(function(k){i
 if(!n){ch.innerHTML='<span class="muted">Links to our YouTube, Facebook, and audio channels will appear here.</span>'}
 </script>
 <script>
-var AM={"Worship":"አምልኮ","Youth":"ወጣቶች","Community":"ማኅበረሰብ","Youth night":"የወጣቶች ምሽት","Community outreach":"የማኅበረሰብ አገልግሎት","Baptism service":"የጥምቀት አገልግሎት","Main sanctuary":"ዋናው አዳራሽ","Church hall":"የቤተ ክርስቲያኑ አዳራሽ","Meet at the church":"በቤተ ክርስቲያኑ እንገናኝ","No events in this category yet.":"በዚህ ምድብ ገና ዝግጅት የለም።","Join us for worship in song and a message from God's Word. Everyone is welcome.":"በዝማሬ አምልኮና ከእግዚአብሔር ቃል በሚቀርብ መልእክት ይቀላቀሉን። ሁሉም እንኳን ደህና መጡ።","A quiet evening of prayer and Scripture reading.":"የጸሎትና የመጽሐፍ ቅዱስ ንባብ ጸጥ ያለ ምሽት።","Worship, teaching, and fellowship for young people.":"ለወጣቶች የአምልኮ፣ የትምህርትና የኅብረት ጊዜ።","Serving our neighbors together. Volunteers are welcome.":"ጎረቤቶቻችንን በአንድነት ማገልገል። በጎ ፈቃደኞች እንኳን ደህና መጡ።","A special service celebrating new believers.":"አዳዲስ አማኞችን የምናከብርበት ልዩ አገልግሎት።","Fonko Kale-Hiwot Church":"ፎንቆ ቃለ ሕይወት ቤተ ክርስቲያን","Visit":"ጉብኝት","Sermons":"ስብከቶች","Events":"ዝግጅቶች","Give":"ስጦታ","Contact":"ዕውቂያ","Everyone is welcome":"ሁሉም እንኳን ደህና መጡ","Welcome home":"እንኳን ደህና መጡ","Whoever you are and wherever you are in your walk with God, there is a place for you at Fonko Kale-Hiwot Church.":"ማንም ይሁኑ፣ በእግዚአብሔር ጉዞዎ ውስጥ በየትኛውም ደረጃ ላይ ቢሆኑ፣ በፎንቆ ቃለ ሕይወት ቤተ ክርስቲያን ለእርስዎ ቦታ አለ።","Plan your visit":"ጉብኝትዎን ያቅዱ","Watch a sermon":"ስብከት ይመልከቱ","Service times":"የአገልግሎት ሰዓቶች","Sunday worship":"የእሁድ አምልኮ","Midweek prayer":"የሳምንት አጋማሽ ጸሎት","Youth fellowship":"የወጣቶች ኅብረት","Find us":"የት እንገኛለን","Church address goes here":"የቤተ ክርስቲያኑ አድራሻ እዚህ ይገባል","Church address":"የቤተ ክርስቲያኑ አድራሻ","Town, Region":"ከተማ፣ ክልል","Get directions":"አቅጣጫ ያግኙ","First time here?":"የመጀመሪያ ጊዜዎ ነው?","Come as you are. Expect warm greetings, worship in song, and a message from God's Word.":"እንደ ሆኑ ይምጡ። ሞቅ ያለ አቀባበል፣ የዝማሬ አምልኮ እና ከእግዚአብሔር ቃል የሚቀርብ መልእክት ይጠብቁ።","Tell us you're coming":"እንደሚመጡ ያሳውቁን","Latest sermon":"የቅርብ ጊዜ ስብከት","All sermons":"ሁሉም ስብከቶች","Sunday message":"የእሁድ መልእክት","Sermon title goes here":"የስብከቱ ርዕስ እዚህ ይገባል","Speaker name · Date · Scripture reference":"የሰባኪው ስም · ቀን · የመጽሐፍ ቅዱስ ጥቅስ","Watch or listen":"ይመልከቱ ወይም ያዳምጡ","Sermon library":"የስብከት ቤተ መጻሕፍት","All":"ሁሉም","Sunday messages":"የእሁድ መልእክቶች","Bible study":"የመጽሐፍ ቅዱስ ጥናት","Special services":"ልዩ አገልግሎቶች","Special service":"ልዩ አገልግሎት","Links to our YouTube, Facebook, and audio channels will appear here.":"የዩቲዩብ፣ የፌስቡክ እና የድምፅ ቻናሎቻችን አገናኞች እዚህ ይታያሉ።","No sermons found. Try another search.":"ምንም ስብከት አልተገኘም። ሌላ ፍለጋ ይሞክሩ።","Walking in faith":"በእምነት መመላለስ","The Word of Life":"የሕይወት ቃል","Grace that sustains":"የሚደግፍ ጸጋ","Prayer and persistence":"ጸሎትና ጽናት","Hope for every season":"ለእያንዳንዱ ወቅት ተስፋ","Serving one another":"እርስ በርስ ማገልገል","Watch":"ይመልከቱ","Listen":"ያዳምጡ","Watch (soon)":"ይመልከቱ (በቅርቡ)","Listen (soon)":"ያዳምጡ (በቅርቡ)","Upcoming events":"መጪ ዝግጅቶች","Full calendar":"ሙሉ የቀን መቁጠሪያ","Event name":"የዝግጅቱ ስም","Time · Place":"ሰዓት · ቦታ","Your generosity supports worship, ministry, and caring for people in our community. Thank you for giving cheerfully.":"ቸርነትዎ አምልኮን፣ አገልግሎትንና በማኅበረሰባችን ያሉ ሰዎችን መንከባከብን ይደግፋል። በደስታ ስለሰጡ እናመሰግናለን።","Bank transfer":"የባንክ ዝውውር","Mobile money":"የሞባይል ገንዘብ","Bank name":"የባንክ ስም","Account name":"የሂሳብ ስም","Account number":"የሂሳብ ቁጥር","Provider":"አገልግሎት ሰጪ","Phone number":"ስልክ ቁጥር","Add details":"ዝርዝር ይጨመራል","\"God loves a cheerful giver.\" 2 Corinthians 9:7":"እግዚአብሔር በደስታ የሚሰጠውን ይወዳልና። 2ኛ ቆሮንቶስ 9፡7","Join us this Sunday":"በዚህ እሁድ ይቀላቀሉን","Sunday worship at 9:00 AM. Come as you are, everyone is welcome.":"የእሁድ አምልኮ በ9:00 AM። እንደ ሆኑ ይምጡ፣ ሁሉም እንኳን ደህና መጡ።","A welcoming community growing together in the Word of Life.":"በሕይወት ቃል አብረን የምናድግ ተቀባይ ማኅበረሰብ።","Visit us":"ይጎብኙን","Address":"አድራሻ","Get in touch":"ያግኙን","Phone":"ስልክ","Add number":"ቁጥር ይጨመራል","Email":"ኢሜይል","Add email":"ኢሜይል ይጨመራል","Explore":"ይመልከቱ","© 2026 Fonko Kale-Hiwot Church. All rights reserved.":"© 2026 ፎንቆ ቃለ ሕይወት ቤተ ክርስቲያን። መብቱ በሕግ የተጠበቀ ነው።","Back to top ↑":"ወደ ላይ ተመለስ ↑"};
+var AM={"Prayer requests and messages":"የጸሎት ጥያቄዎችና መልእክቶች","We would love to hear from you. Share a prayer request or send us a message.":"ከእርስዎ መስማት እንወዳለን። የጸሎት ጥያቄዎን ያካፍሉን ወይም መልእክት ይላክሉን።","Type":"አይነት","Prayer request":"የጸሎት ጥያቄ","Message":"መልእክት","Your name (optional)":"ስምዎ (አማራጭ)","Phone or email (optional)":"ስልክ ወይም ኢሜይል (አማራጭ)","Your message":"መልእክትዎ","Send":"ላክ","Please write a message first.":"እባክዎ መገመሪያ መልእክት ይጻሉ።","Sending...":"በመላክ ላይ...","Thank you. Your message was sent.":"እናመሰግናለን። መልእክትዎ ተልዳል።","Too many messages. Please try again later.":"ብዙ መልእክቶች ተልከውል። እባክዎ ቆይተው ይሞክሩ።","Sorry, we could not send your message. Please try again.":"ይቅርታ፣ መልእክትዎን መላክ አልተቻለም። እባክዎ እንደገና ይሞክሩ።","Worship":"አምልኮ","Youth":"ወጣቶች","Community":"ማኅበረሰብ","Youth night":"የወጣቶች ምሽት","Community outreach":"የማኅበረሰብ አገልግሎት","Baptism service":"የጥምቀት አገልግሎት","Main sanctuary":"ዋናው አዳራሽ","Church hall":"የቤተ ክርስቲያኑ አዳራሽ","Meet at the church":"በቤተ ክርስቲያኑ እንገናኝ","No events in this category yet.":"በዚህ ምድብ ገና ዝግጅት የለም።","Join us for worship in song and a message from God's Word. Everyone is welcome.":"በዝማሬ አምልኮና ከእግዚአብሔር ቃል በሚቀርብ መልእክት ይቀላቀሉን። ሁሉም እንኳን ደህና መጡ።","A quiet evening of prayer and Scripture reading.":"የጸሎትና የመጽሐፍ ቅዱስ ንባብ ጸጥ ያለ ምሽት።","Worship, teaching, and fellowship for young people.":"ለወጣቶች የአምልኮ፣ የትምህርትና የኅብረት ጊዜ።","Serving our neighbors together. Volunteers are welcome.":"ጎረቤቶቻችንን በአንድነት ማገልገል። በጎ ፈቃደኞች እንኳን ደህና መጡ።","A special service celebrating new believers.":"አዳዲስ አማኞችን የምናከብርበት ልዩ አገልግሎት።","Fonko Kale-Hiwot Church":"ፎንቆ ቃለ ሕይወት ቤተ ክርስቲያን","Visit":"ጉብኝት","Sermons":"ስብከቶች","Events":"ዝግጅቶች","Give":"ስጦታ","Contact":"ዕውቂያ","Everyone is welcome":"ሁሉም እንኳን ደህና መጡ","Welcome home":"እንኳን ደህና መጡ","Whoever you are and wherever you are in your walk with God, there is a place for you at Fonko Kale-Hiwot Church.":"ማንም ይሁኑ፣ በእግዚአብሔር ጉዞዎ ውስጥ በየትኛውም ደረጃ ላይ ቢሆኑ፣ በፎንቆ ቃለ ሕይወት ቤተ ክርስቲያን ለእርስዎ ቦታ አለ።","Plan your visit":"ጉብኝትዎን ያቅዱ","Watch a sermon":"ስብከት ይመልከቱ","Service times":"የአገልግሎት ሰዓቶች","Sunday worship":"የእሁድ አምልኮ","Midweek prayer":"የሳምንት አጋማሽ ጸሎት","Youth fellowship":"የወጣቶች ኅብረት","Find us":"የት እንገኛለን","Church address goes here":"የቤተ ክርስቲያኑ አድራሻ እዚህ ይገባል","Church address":"የቤተ ክርስቲያኑ አድራሻ","Town, Region":"ከተማ፣ ክልል","Get directions":"አቅጣጫ ያግኙ","First time here?":"የመጀመሪያ ጊዜዎ ነው?","Come as you are. Expect warm greetings, worship in song, and a message from God's Word.":"እንደ ሆኑ ይምጡ። ሞቅ ያለ አቀባበል፣ የዝማሬ አምልኮ እና ከእግዚአብሔር ቃል የሚቀርብ መልእክት ይጠብቁ።","Tell us you're coming":"እንደሚመጡ ያሳውቁን","Latest sermon":"የቅርብ ጊዜ ስብከት","All sermons":"ሁሉም ስብከቶች","Sunday message":"የእሁድ መልእክት","Sermon title goes here":"የስብከቱ ርዕስ እዚህ ይገባል","Speaker name · Date · Scripture reference":"የሰባኪው ስም · ቀን · የመጽሐፍ ቅዱስ ጥቅስ","Watch or listen":"ይመልከቱ ወይም ያዳምጡ","Sermon library":"የስብከት ቤተ መጻሕፍት","All":"ሁሉም","Sunday messages":"የእሁድ መልእክቶች","Bible study":"የመጽሐፍ ቅዱስ ጥናት","Special services":"ልዩ አገልግሎቶች","Special service":"ልዩ አገልግሎት","Links to our YouTube, Facebook, and audio channels will appear here.":"የዩቲዩብ፣ የፌስቡክ እና የድምፅ ቻናሎቻችን አገናኞች እዚህ ይታያሉ።","No sermons found. Try another search.":"ምንም ስብከት አልተገኘም። ሌላ ፍለጋ ይሞክሩ።","Walking in faith":"በእምነት መመላለስ","The Word of Life":"የሕይወት ቃል","Grace that sustains":"የሚደግፍ ጸጋ","Prayer and persistence":"ጸሎትና ጽናት","Hope for every season":"ለእያንዳንዱ ወቅት ተስፋ","Serving one another":"እርስ በርስ ማገልገል","Watch":"ይመልከቱ","Listen":"ያዳምጡ","Watch (soon)":"ይመልከቱ (በቅርቡ)","Listen (soon)":"ያዳምጡ (በቅርቡ)","Upcoming events":"መጪ ዝግጅቶች","Full calendar":"ሙሉ የቀን መቁጠሪያ","Event name":"የዝግጅቱ ስም","Time · Place":"ሰዓት · ቦታ","Your generosity supports worship, ministry, and caring for people in our community. Thank you for giving cheerfully.":"ቸርነትዎ አምልኮን፣ አገልግሎትንና በማኅበረሰባችን ያሉ ሰዎችን መንከባከብን ይደግፋል። በደስታ ስለሰጡ እናመሰግናለን።","Bank transfer":"የባንክ ዝውውር","Mobile money":"የሞባይል ገንዘብ","Bank name":"የባንክ ስም","Account name":"የሂሳብ ስም","Account number":"የሂሳብ ቁጥር","Provider":"አገልግሎት ሰጪ","Phone number":"ስልክ ቁጥር","Add details":"ዝርዝር ይጨመራል","\"God loves a cheerful giver.\" 2 Corinthians 9:7":"እግዚአብሔር በደስታ የሚሰጠውን ይወዳልና። 2ኛ ቆሮንቶስ 9፡7","Join us this Sunday":"በዚህ እሁድ ይቀላቀሉን","Sunday worship at 9:00 AM. Come as you are, everyone is welcome.":"የእሁድ አምልኮ በ9:00 AM። እንደ ሆኑ ይምጡ፣ ሁሉም እንኳን ደህና መጡ።","A welcoming community growing together in the Word of Life.":"በሕይወት ቃል አብረን የምናድግ ተቀባይ ማኅበረሰብ።","Visit us":"ይጎብኙን","Address":"አድራሻ","Get in touch":"ያግኙን","Phone":"ስልክ","Add number":"ቁጥር ይጨመራል","Email":"ኢሜይል","Add email":"ኢሜይል ይጨመራል","Explore":"ይመልከቱ","© 2026 Fonko Kale-Hiwot Church. All rights reserved.":"© 2026 ፎንቆ ቃለ ሕይወት ቤተ ክርስቲያን። መብቱ በሕግ የተጠበቀ ነው።","Back to top ↑":"ወደ ላይ ተመለስ ↑"};
 var SUBS=[["Speaker name","የሰባኪው ስም"],["Hebrews","ዕብራውያን"],["John","ዮሐንስ"],["Ephesians","ኤፌሶን"],["Luke","ሉቃስ"],["Romans","ሮሜ"],["Galatians","ገላትያ"]];
 var PH="Search by title or Scripture",PHAM="በርዕስ ወይም በጥቅስ ይፈልጉ",TTL="Fonko Kale-Hiwot Church";
 var lang="en";
@@ -324,6 +347,32 @@ var ek="all";
 function drawE(){var h="";EV.forEach(function(e){if(ek==="all"||e.k===ek){h+='<details class="ev"><summary><div class="date"><span>'+e.m+'</span><b>'+e.d+'</b></div><div class="ev-t"><b>'+e.t+'</b><div class="muted"><span>'+e.h+'</span> \u00b7 <span>'+e.p+'</span></div></div><span class="tag">'+e.k+'</span></summary><p class="muted">'+e.x+'</p></details>'}});var L2=document.getElementById("ev-list");L2.innerHTML=h||'<p class="muted">No events in this category yet.</p>';if(window.applyLang)applyLang(L2)}
 document.getElementById("ev-chips").addEventListener("click",function(e){var c=e.target.closest(".chip");if(!c)return;ek=c.getAttribute("data-e");document.querySelectorAll("#ev-chips .chip").forEach(function(x){x.classList.toggle("on",x===c)});drawE()});
 drawE();
+</script>
+<script>
+var API=(location.hostname==="localhost"||location.hostname==="127.0.0.1")?"http://localhost:3000":"";
+var MON=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+function esc(v){return String(v==null?"":v).replace(/[&<>"']/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]})}
+function fmtDay(v){if(!v)return"";var q=String(v).slice(0,10).split("-");return MON[+q[1]-1]+" "+(+q[2])+", "+q[0]}
+function fmtTime(v){var h=+String(v).slice(11,13),m=String(v).slice(14,16);return (h%12||12)+":"+m+" "+(h<12?"AM":"PM")}
+function T(v){return lang==="am"&&AM[v]?AM[v]:v}
+function fillLatest(){var x=S[0],t=document.getElementById("ls-t");if(!t)return;var k=document.getElementById("ls-k"),m=document.getElementById("ls-m"),b=document.getElementById("ls-b");
+if(!x){k.textContent="";t.textContent="Sermons will appear here soon";m.textContent="";b.hidden=true;return}
+b.hidden=false;k.innerHTML=x.k;t.innerHTML=x.t;m.innerHTML=[x.p,x.d,x.r].filter(Boolean).join(" \u00b7 ");
+var u=/^https?:/.test(x.v)?x.v:(/^https?:/.test(x.a)?x.a:"");b.href=u||"#library";if(u){b.target="_blank";b.rel="noopener"}}
+function loadData(){
+fetch(API+"/api/sermons").then(function(r){if(!r.ok)throw 0;return r.json()}).then(function(rows){S=rows.map(function(x){return{t:esc(x.title),k:esc(x.category),p:esc(x.speaker),d:esc(fmtDay(x.preached_on)),r:esc(x.scripture),v:esc(x.video_url),a:esc(x.audio_url)}});draw();fillLatest()}).catch(function(){});
+fetch(API+"/api/events").then(function(r){if(!r.ok)throw 0;return r.json()}).then(function(rows){EV=rows.map(function(x){return{m:esc(MON[+String(x.starts_at).slice(5,7)-1]),d:esc(String(x.starts_at).slice(8,10)),t:esc(x.title),k:esc(x.category),h:esc(fmtTime(x.starts_at)),p:esc(x.location),x:esc(x.description)}});drawE()}).catch(function(){})}
+document.getElementById("mform").addEventListener("submit",function(e){e.preventDefault();var f=e.target,st=document.getElementById("mstat"),b=f.querySelector("button"),el=f.elements,body=el.body.value.trim();
+if(!body){st.textContent=T("Please write a message first.");return}
+b.disabled=true;st.textContent=T("Sending...");
+fetch(API+"/api/messages",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({kind:el.kind.value,name:el.pname.value,contact:el.contact.value,body:body})}).then(function(r){if(r.status===429)throw new Error("many");if(!r.ok)throw new Error("fail");f.reset();st.textContent=T("Thank you. Your message was sent.")}).catch(function(err){st.textContent=T(err.message==="many"?"Too many messages. Please try again later.":"Sorry, we could not send your message. Please try again.")}).then(function(){b.disabled=false})});
+function mapS(rows){return rows.map(function(x){return{t:esc(x.title),k:esc(x.category),p:esc(x.speaker),d:esc(fmtDay(x.preached_on)),r:esc(x.scripture),v:esc(x.video_url),a:esc(x.audio_url)}})}
+function mapE(rows){return rows.map(function(x){return{m:esc(MON[+String(x.starts_at).slice(5,7)-1]),d:esc(String(x.starts_at).slice(8,10)),t:esc(x.title),k:esc(x.category),h:esc(fmtTime(x.starts_at)),p:esc(x.location),x:esc(x.description)}})}
+function loadContent(){var yday=new Date(Date.now()-864e5).toISOString().slice(0,10);
+fetch("content.json",{cache:"no-store"}).then(function(r){if(!r.ok)throw 0;return r.json()}).then(function(c){
+if(Array.isArray(c.sermons)){S=mapS(c.sermons);draw();fillLatest()}
+if(Array.isArray(c.events)){EV=mapE(c.events.filter(function(x){return String(x.starts_at).slice(0,10)>=yday}));drawE()}}).catch(function(){})}
+if(API){document.getElementById("message").hidden=false;document.getElementById("msg-link").hidden=false;loadData()}else{loadContent()}
 </script>
 </body>
 </html>

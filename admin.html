@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Church Admin</title>
+<style>
+:root{--bg:#FAF3E3;--card:#fff;--navy:#1F3A5F;--gold:#C9A227;--text:#1F2937;--muted:#4A5568;--line:#E8DCC0}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font:16px/1.6 system-ui,"Noto Sans Ethiopic",sans-serif}
+header{background:var(--navy);color:#F5E9D3;padding:14px 20px;display:flex;justify-content:space-between;align-items:center}
+main{max-width:860px;margin:24px auto;padding:0 16px}
+h2{margin:0 0 12px;color:var(--navy)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px;margin-bottom:18px}
+label{display:block;font-size:14px;color:var(--muted);margin-bottom:4px}
+input,select,textarea{width:100%;padding:10px 12px;border:1px solid var(--line);border-radius:10px;font:inherit;margin-bottom:12px;background:#fff;color:var(--text)}
+button{font:inherit;cursor:pointer;border-radius:999px;padding:8px 18px;border:1px solid var(--gold);background:transparent;color:var(--navy)}
+button.p{background:var(--gold);font-weight:500}
+button.d{border-color:#B42318;color:#B42318}
+header button{color:#F5E9D3}
+.tabs{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap}
+.tabs button.on{background:var(--navy);color:#fff;border-color:var(--navy)}
+.row{display:flex;justify-content:space-between;gap:12px;align-items:flex-start;padding:12px 0;border-bottom:1px solid var(--line)}
+.row:last-child{border:0}
+.muted{color:var(--muted);font-size:14px}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:0 12px}
+.msg{white-space:pre-wrap;margin:4px 0 0}
+@media(max-width:600px){.g2{grid-template-columns:1fr}.row{flex-direction:column}}
+</style>
+</head>
+<body>
+<header><strong>Fonko Kale-Hiwot Church · Admin</strong><button id="out" hidden>Log out</button></header>
+<main>
+<p id="note" class="card" hidden>This page needs the backend. Start it with <b>npm start</b>, then open this page with Live Server.</p>
+
+<section id="login" class="card" hidden>
+  <h2>Sign in</h2>
+  <label for="em">Email</label><input id="em" type="email" autocomplete="username">
+  <label for="pw">Password</label><input id="pw" type="password" autocomplete="current-password">
+  <button class="p" id="go">Sign in</button>
+  <p id="le" class="muted"></p>
+</section>
+
+<div id="app" hidden>
+  <div class="card">
+    <h2>Publish to the live site</h2>
+    <p class="muted">After you add or change sermons and events, click Publish. The first time, choose your website folder (the one that contains index.html) and allow editing. The page saves <b>content.json</b> there. Then commit and push in Git.</p>
+    <button class="p" id="pub">Publish content.json</button> <button id="pubc">Change folder</button> <p id="pubs" class="muted" style="margin:10px 0 0"></p>
+  </div>
+
+  <div class="tabs">
+    <button data-t="sermons" class="on">Sermons</button>
+    <button data-t="events">Events</button>
+    <button data-t="messages">Messages</button>
+  </div>
+
+  <section id="t-sermons">
+    <div class="card">
+      <h2 id="sh">Add a sermon</h2>
+      <input type="hidden" id="s-id">
+      <label for="s-title">Title</label><input id="s-title" maxlength="200">
+      <div class="g2">
+        <div><label for="s-speaker">Speaker</label><input id="s-speaker" maxlength="120"></div>
+        <div><label for="s-date">Date</label><input id="s-date" type="date"></div>
+        <div><label for="s-cat">Type</label><select id="s-cat"><option>Sunday message</option><option>Bible study</option><option>Special service</option></select></div>
+        <div><label for="s-scr">Scripture</label><input id="s-scr" maxlength="120"></div>
+      </div>
+      <label for="s-vid">Video link (YouTube, Facebook...)</label><input id="s-vid" placeholder="https://">
+      <label for="s-aud">Audio link</label><input id="s-aud" placeholder="https://">
+      <button class="p" id="s-save">Save sermon</button> <button id="s-cancel" hidden>Cancel</button>
+    </div>
+    <div class="card"><h2>All sermons</h2><div id="sl"></div></div>
+  </section>
+
+  <section id="t-events" hidden>
+    <div class="card">
+      <h2 id="eh">Add an event</h2>
+      <input type="hidden" id="e-id">
+      <label for="e-title">Title</label><input id="e-title" maxlength="200">
+      <div class="g2">
+        <div><label for="e-when">Date and time</label><input id="e-when" type="datetime-local"></div>
+        <div><label for="e-cat">Type</label><select id="e-cat"><option>Worship</option><option>Youth</option><option>Community</option></select></div>
+      </div>
+      <label for="e-loc">Place</label><input id="e-loc" maxlength="160">
+      <label for="e-desc">Description</label><textarea id="e-desc" rows="3" maxlength="2000"></textarea>
+      <button class="p" id="e-save">Save event</button> <button id="e-cancel" hidden>Cancel</button>
+    </div>
+    <div class="card"><h2>Upcoming events</h2><div id="el"></div></div>
+  </section>
+
+  <section id="t-messages" hidden>
+    <div class="card"><h2>Prayer requests and messages</h2><div id="ml"></div></div>
+  </section>
+</div>
+</main>
+
+<script>
+var API=(location.hostname==="localhost"||location.hostname==="127.0.0.1")?"http://localhost:3000":"";
+var tok="";try{tok=sessionStorage.getItem("tok")||""}catch(e){}
+var S=[],E=[];
+var $=function(i){return document.getElementById(i)};
+function esc(v){return String(v==null?"":v).replace(/[&<>"']/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]})}
+function api(method,path,body){
+  var h={"Content-Type":"application/json"};if(tok)h.Authorization="Bearer "+tok;
+  return fetch(API+path,{method:method,headers:h,body:body?JSON.stringify(body):undefined}).then(function(r){
+    return r.json().catch(function(){return{}}).then(function(d){
+      if(r.status===401&&tok){logout()}
+      if(!r.ok)throw new Error(d.error||"Something went wrong");
+      return d});
+  });
+}
+function logout(){tok="";try{sessionStorage.removeItem("tok")}catch(e){}init()}
+function init(){
+  $("note").hidden=!!API;$("login").hidden=!API||!!tok;$("app").hidden=!tok;$("out").hidden=!tok;
+  if(tok&&API)loadAll();
+}
+$("out").onclick=logout;
+$("go").onclick=function(){
+  $("le").textContent="";
+  api("POST","/api/login",{email:$("em").value,password:$("pw").value}).then(function(d){
+    tok=d.token;try{sessionStorage.setItem("tok",tok)}catch(e){}
+    $("pw").value="";init();
+  }).catch(function(e){$("le").textContent=e.message});
+};
+document.querySelectorAll(".tabs button").forEach(function(b){
+  b.onclick=function(){
+    document.querySelectorAll(".tabs button").forEach(function(x){x.classList.toggle("on",x===b)});
+    ["sermons","events","messages"].forEach(function(t){$("t-"+t).hidden=t!==b.dataset.t});
+  };
+});
+function loadAll(){
+  api("GET","/api/sermons").then(function(r){S=r;
+    $("sl").innerHTML=r.map(function(x){return '<div class="row"><div><b>'+esc(x.title)+'</b><div class="muted">'+esc([x.speaker,x.preached_on,x.category].filter(Boolean).join(" \u00b7 "))+'</div></div><div><button data-a="es" data-id="'+x.id+'">Edit</button> <button class="d" data-a="ds" data-id="'+x.id+'">Delete</button></div></div>'}).join("")||'<p class="muted">No sermons yet.</p>';
+  }).catch(function(){});
+  api("GET","/api/events").then(function(r){E=r;
+    $("el").innerHTML=r.map(function(x){return '<div class="row"><div><b>'+esc(x.title)+'</b><div class="muted">'+esc([String(x.starts_at).slice(0,16),x.location,x.category].filter(Boolean).join(" \u00b7 "))+'</div></div><div><button data-a="ee" data-id="'+x.id+'">Edit</button> <button class="d" data-a="de" data-id="'+x.id+'">Delete</button></div></div>'}).join("")||'<p class="muted">No upcoming events.</p>';
+  }).catch(function(){});
+  api("GET","/api/admin/messages").then(function(r){
+    $("ml").innerHTML=r.map(function(x){return '<div class="row"><div><b>'+(x.kind==="prayer"?"Prayer request":"Message")+'</b> <span class="muted">'+esc([x.name,x.contact,x.created_at].filter(Boolean).join(" \u00b7 "))+'</span><p class="msg">'+esc(x.body)+'</p></div><div><button class="d" data-a="dm" data-id="'+x.id+'">Delete</button></div></div>'}).join("")||'<p class="muted">No messages yet.</p>';
+  }).catch(function(){});
+}
+function fail(e){alert(e.message)}
+function resetS(){["s-id","s-title","s-speaker","s-date","s-scr","s-vid","s-aud"].forEach(function(i){$(i).value=""});$("s-cat").selectedIndex=0;$("sh").textContent="Add a sermon";$("s-cancel").hidden=true}
+function resetE(){["e-id","e-title","e-when","e-loc","e-desc"].forEach(function(i){$(i).value=""});$("e-cat").selectedIndex=0;$("eh").textContent="Add an event";$("e-cancel").hidden=true}
+$("s-cancel").onclick=resetS;$("e-cancel").onclick=resetE;
+$("s-save").onclick=function(){
+  var id=$("s-id").value,b={title:$("s-title").value,speaker:$("s-speaker").value,preached_on:$("s-date").value,category:$("s-cat").value,scripture:$("s-scr").value,video_url:$("s-vid").value,audio_url:$("s-aud").value};
+  api(id?"PUT":"POST","/api/admin/sermons"+(id?"/"+id:""),b).then(function(){resetS();loadAll()}).catch(fail);
+};
+$("e-save").onclick=function(){
+  var id=$("e-id").value,b={title:$("e-title").value,starts_at:$("e-when").value,location:$("e-loc").value,category:$("e-cat").value,description:$("e-desc").value};
+  api(id?"PUT":"POST","/api/admin/events"+(id?"/"+id:""),b).then(function(){resetE();loadAll()}).catch(fail);
+};
+document.addEventListener("click",function(e){
+  var b=e.target.closest("button[data-a]");if(!b)return;
+  var id=b.dataset.id,a=b.dataset.a,x;
+  if(a==="es"){x=S.filter(function(r){return String(r.id)===id})[0];if(!x)return;
+    $("s-id").value=x.id;$("s-title").value=x.title||"";$("s-speaker").value=x.speaker||"";$("s-date").value=x.preached_on||"";$("s-cat").value=x.category;$("s-scr").value=x.scripture||"";$("s-vid").value=x.video_url||"";$("s-aud").value=x.audio_url||"";
+    $("sh").textContent="Edit sermon";$("s-cancel").hidden=false;window.scrollTo(0,0)}
+  else if(a==="ee"){x=E.filter(function(r){return String(r.id)===id})[0];if(!x)return;
+    $("e-id").value=x.id;$("e-title").value=x.title||"";$("e-when").value=String(x.starts_at).replace(" ","T").slice(0,16);$("e-cat").value=x.category;$("e-loc").value=x.location||"";$("e-desc").value=x.description||"";
+    $("eh").textContent="Edit event";$("e-cancel").hidden=false;window.scrollTo(0,0)}
+  else{
+    var path={ds:"sermons",de:"events",dm:"messages"}[a];if(!path||!confirm("Delete this for good?"))return;
+    api("DELETE","/api/admin/"+path+"/"+id).then(loadAll).catch(fail);
+  }
+});
+function idb(){return new Promise(function(res,rej){var r=indexedDB.open("churchadmin",1);r.onupgradeneeded=function(){r.result.createObjectStore("kv")};r.onsuccess=function(){res(r.result)};r.onerror=function(){rej(r.error)}})}
+function kvGet(k){return idb().then(function(d){return new Promise(function(res){var q=d.transaction("kv").objectStore("kv").get(k);q.onsuccess=function(){res(q.result)};q.onerror=function(){res(null)}})})}
+function kvSet(k,v){return idb().then(function(d){return new Promise(function(res,rej){var t=d.transaction("kv","readwrite");t.objectStore("kv").put(v,k);t.oncomplete=res;t.onerror=function(){rej(t.error)}})})}
+function buildText(){
+  var keep=function(o,ks){var r={};ks.forEach(function(k){r[k]=o[k]});return r};
+  return JSON.stringify({updated:new Date().toISOString(),
+    sermons:S.map(function(x){return keep(x,["title","speaker","preached_on","category","scripture","video_url","audio_url"])}),
+    events:E.map(function(x){return keep(x,["title","starts_at","location","category","description"])})},null,2);
+}
+function download(text){
+  var l=document.createElement("a");
+  l.href=URL.createObjectURL(new Blob([text],{type:"application/json"}));
+  l.download="content.json";document.body.appendChild(l);l.click();l.remove();
+}
+$("pubc").onclick=function(){kvSet("dir",null).catch(function(){});$("pubs").textContent="Next time you click Publish, you can choose a different folder."};
+$("pub").onclick=async function(){
+  var text=buildText(),st=$("pubs"),n=S.length+" sermons and "+E.length+" events";
+  if(!window.showDirectoryPicker){download(text);st.textContent="Downloaded ("+n+"). Move content.json into your website folder, then commit and push.";return}
+  try{
+    var dir=await kvGet("dir").catch(function(){return null});
+    if(dir){var p=await dir.queryPermission({mode:"readwrite"});if(p!=="granted")p=await dir.requestPermission({mode:"readwrite"});if(p!=="granted")dir=null}
+    if(!dir){dir=await window.showDirectoryPicker({mode:"readwrite",id:"church-site"});await kvSet("dir",dir).catch(function(){})}
+    var f=await dir.getFileHandle("content.json",{create:true});
+    var w=await f.createWritable();await w.write(text);await w.close();
+    st.textContent="Saved "+n+" to content.json in the folder \""+dir.name+"\". Now commit and push.";
+  }catch(e){
+    if(e&&e.name==="AbortError"){st.textContent="Cancelled.";return}
+    download(text);st.textContent="Could not save into the folder, so the file was downloaded instead. Move it into your website folder.";
+  }
+};
+init();
+</script>
+</body>
+</html>

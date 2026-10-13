@@ -1,0 +1,42 @@
+{
+  "updated": "2026-10-13T12:08:50.398Z",
+  "sermons": [
+    {
+      "title": "God's Way",
+      "speaker": "YONAN",
+      "preached_on": "2026-12-07",
+      "category": "Sunday message",
+      "scripture": null,
+      "video_url": null,
+      "audio_url": null
+    },
+    {
+      "title": "Jesus Comes Back",
+      "speaker": "YONAN",
+      "preached_on": "2026-09-06",
+      "category": "Special service",
+      "scripture": null,
+      "video_url": "https://www.youtube.com/@FKCMEDIA",
+      "audio_url": null
+    },
+    {
+      "title": "Seeking God",
+      "speaker": "YONAN",
+      "preached_on": "2026-02-13",
+      "category": "Sunday message",
+      "scripture": null,
+      "video_url": "https://www.youtube.com/@FKCMEDIA",
+      "audio_url": null
+    },
+    {
+      "title": "FONKO-KALE_HIWOT-CHURCH",
+      "speaker": null,
+      "preached_on": "2026-02-13",
+      "category": "Sunday message",
+      "scripture": null,
+      "video_url": "https://www.youtube.com/@FKCMEDIA",
+      "audio_url": null
+    }
+  ],
+  "events": []
+}
